@@ -1,0 +1,1139 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kur skrisim – kur ilsėsimės, pasakys vietiniai</title>
+<meta name="description" content="Parašyk, kur ir kada nori keliauti. Kur skrisim parodys kelialapius ir pigius skrydžius iš Vilniaus.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --ink:#111318; --muted:#6B7280; --line:#E8EAEE; --soft:#F6F7F9;
+  --accent:#1F4BE0; --accent-ink:#FFFFFF; --sun:#FFC53D; --deep:#FFFFFF; --deep-ink:#111318;
+  --font:"Hanken Grotesk","Segoe UI",system-ui,sans-serif; color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5}
+h1,h2,h3,p{margin:0}
+button,select,input{font-family:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.tnum{font-variant-numeric:tabular-nums}
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:20px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Viršutinė juosta */
+.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none;font-weight:800;font-size:1.2rem;letter-spacing:-.03em;background:none;border:0;padding:0;cursor:pointer}
+.brand svg{width:34px;height:34px;display:block}
+.nav nav{margin-left:auto;display:flex;gap:22px;align-items:center}
+.nav nav a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem}
+.nav nav a:hover{color:var(--ink)}
+.beta{font-size:.72rem;font-weight:600;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:1px 9px}
+@media (max-width:640px){.nav nav a{display:none}}
+
+/* Hero */
+.hero{padding-block:clamp(36px,7vw,84px) clamp(36px,6vw,72px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center}
+.hero h1{font-size:clamp(2.4rem,5.6vw,4.2rem);line-height:1.02;letter-spacing:-.04em;font-weight:800;text-wrap:balance}
+.hero .lead{color:var(--muted);font-size:1.15rem;margin-top:16px;max-width:46ch}
+.slot-hero{margin-top:28px}
+.ask{display:flex;align-items:center;gap:8px;background:var(--bg);border-radius:14px;padding:6px 6px 6px 20px;border:1.5px solid var(--line)}
+.ask:focus-within{border-color:var(--ink)}
+.ask input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);outline:none;font-size:1.05rem;padding-block:15px}
+.ask input::placeholder{color:var(--muted)}
+.ask button{flex:none;height:48px;padding-inline:20px;border:0;border-radius:10px;background:var(--ink);color:var(--bg);font-weight:700;font-size:1rem;cursor:pointer;display:flex;align-items:center;gap:8px}
+.ask button svg{width:18px;height:18px}
+.ask button:hover{filter:brightness(1.08)}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.link{background:var(--soft);border:0;border-radius:99px;padding:7px 14px;color:var(--ink);font-size:.9rem;cursor:pointer;text-align:left}
+.link:hover{background:var(--line)}
+.follow .link{background:none;padding:0;color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line);border-radius:0}
+.follow .link:hover{color:var(--ink);text-decoration-color:var(--ink)}
+.collage{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.collage figure{margin:0;border-radius:18px;overflow:hidden;background:var(--soft);position:relative}
+.collage img{display:block;width:100%;height:100%;object-fit:cover}
+.collage .a{aspect-ratio:3/4}
+.collage .b{aspect-ratio:1/1;margin-top:44px}
+.collage .c{aspect-ratio:1/1;margin-top:-30px}
+.collage .d{aspect-ratio:3/4}
+.collage figcaption{position:absolute;left:10px;bottom:10px;background:var(--bg);color:var(--ink);font-size:.8rem;font-weight:600;border-radius:99px;padding:3px 10px}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.collage{order:-1;grid-template-columns:repeat(3,1fr)}.collage .a,.collage .b,.collage .c{aspect-ratio:3/4;margin-top:0}.collage .d{display:none}}
+
+/* Sekcijos */
+.sec{padding-block:clamp(36px,6vw,64px)}
+.sec.soft{background:var(--bg);border-block:1px solid var(--line)}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+.sec-h h2{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.03em;font-weight:800}
+.sec-h span{color:var(--muted);font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:30px 20px}
+.card{background:none;border:0;padding:0;text-align:left;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ph{aspect-ratio:3/2;border-radius:14px;overflow:hidden;background:var(--soft)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;transform:scale(var(--z,1));transform-origin:var(--o,50% 50%)}
+.card:hover .ph img{transform:scale(calc(var(--z,1) + .04))}
+@media (prefers-reduced-motion:reduce){.card:hover .ph img{transform:scale(var(--z,1))}}
+.cm{display:flex;flex-direction:column;gap:2px}
+.cm .where{color:var(--muted);font-size:.88rem}
+.cm .name{font-size:1.08rem;font-weight:700;letter-spacing:-.01em;line-height:1.25}
+.cm .sub{color:var(--muted);font-size:.9rem}
+.cm .price{margin-top:6px}
+.cm .price b{font-size:1.35rem;letter-spacing:-.02em}
+.cm .price span{color:var(--muted);font-size:.88rem}
+
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;counter-reset:s;list-style:none;margin:0;padding:0}
+.steps li{counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--bg);font-weight:700;margin-bottom:14px}
+.steps h3{font-size:1.15rem;letter-spacing:-.02em;margin-bottom:6px}
+.steps p{color:var(--muted);max-width:34ch}
+.steps q{display:block;margin-top:10px;font-size:.92rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:8px 12px;quotes:none}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:14px}
+.dest{position:relative;border:0;padding:0;border-radius:14px;overflow:hidden;aspect-ratio:4/5;cursor:pointer;background:var(--soft);color:#fff;text-align:left}
+.dest img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.dest:hover img{transform:scale(1.05)}
+@media (prefers-reduced-motion:reduce){.dest:hover img{transform:none}}
+.dest::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,10,20,.78),rgba(5,10,20,0) 55%)}
+.dest span{position:absolute;left:14px;right:14px;bottom:12px;z-index:1;display:flex;flex-direction:column}
+.dest b{font-size:1.1rem;letter-spacing:-.02em}
+.dest small{font-size:.85rem;opacity:.9}
+
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
+.why h3{font-size:1.15rem;letter-spacing:-.02em;margin-bottom:6px}
+.why p{color:var(--muted);max-width:36ch}
+.why svg{width:30px;height:30px;margin-bottom:12px;color:var(--accent)}
+@media (max-width:760px){.why{grid-template-columns:1fr}}
+
+.cta{background:var(--soft);color:var(--ink);border-radius:20px;padding:clamp(28px,5vw,56px);display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cta h2{font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.03em;max-width:20ch}
+.cta button{border:0;border-radius:12px;background:var(--ink);color:var(--bg);font-weight:800;font-size:1rem;padding:14px 22px;cursor:pointer}
+
+/* Rezultatai */
+.app.started .landing{display:none}
+.thread{display:flex;flex-direction:column;gap:18px;padding-block:28px 16px;min-height:60dvh;min-width:0}
+.thread:empty{display:none}
+.u-msg{align-self:flex-end;max-width:min(85%,520px);background:var(--soft);padding:9px 16px;border-radius:16px 16px 4px 16px;overflow-wrap:anywhere}
+.b-msg{max-width:62ch;overflow-wrap:anywhere}
+.b-msg.muted{color:var(--muted);font-size:.92rem}
+.dots{display:inline-flex;gap:4px;margin-left:6px;vertical-align:middle}
+.dots i{width:5px;height:5px;border-radius:50%;background:var(--muted);animation:blink 1s infinite ease-in-out}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.dots i{animation:none;opacity:.6}}
+.dock{position:sticky;bottom:0;padding-block:12px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--bg) 75%,transparent)}
+.dock .ask{max-width:720px;margin-inline:auto;background:var(--bg);box-shadow:0 0 0 1px var(--line)}
+.app:not(.started) .dock{display:none}
+.results{display:flex;flex-direction:column;gap:28px;min-width:0}
+.bar{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 20px;border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:22px}
+.tab{background:none;border:0;padding:0 0 10px;font-size:1rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink);font-weight:700}
+.sort{display:flex;align-items:center;gap:8px;padding-bottom:8px;color:var(--muted);font-size:.9rem}
+.sort select{background:transparent;color:var(--ink);border:0;font-size:.9rem;font-weight:600;cursor:pointer;padding:2px 0}
+.flights{display:flex;flex-direction:column}
+.frow{display:grid;grid-template-columns:56px minmax(0,1fr) auto auto;align-items:center;gap:4px 18px;padding-block:14px;border-top:1px solid var(--line)}
+.frow:last-child{border-bottom:1px solid var(--line)}
+.frow img{width:56px;height:56px;border-radius:10px;object-fit:cover;display:block}
+.frow .r{font-weight:700}
+.frow .s{color:var(--muted);font-size:.9rem}
+.frow .p{font-size:.88rem;color:var(--muted);text-align:right}
+.frow .p b{color:var(--ink);font-size:1.2rem;letter-spacing:-.02em}
+.frow a{color:var(--accent);font-weight:700;text-decoration:none;white-space:nowrap}
+.frow a:hover{text-decoration:underline}
+.note{color:var(--muted);font-size:.86rem;max-width:70ch;margin-top:12px}
+.follow{display:flex;flex-wrap:wrap;gap:6px 20px}
+.empty{color:var(--muted);padding-block:20px}
+
+/* Detalės */
+.veil[hidden]{display:none}
+.veil{position:fixed;inset:0;z-index:40;background:rgba(8,10,14,.55);display:grid;place-items:end center}
+.sheet{background:var(--bg);color:var(--ink);width:min(720px,100%);max-height:94dvh;overflow:auto;border-radius:18px 18px 0 0;padding-bottom:env(safe-area-inset-bottom,0px);position:relative}
+@media (min-width:760px){.veil{place-items:center;padding:24px}.sheet{border-radius:18px;max-height:90dvh}}
+.sheet .x{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;border:0;background:var(--bg);color:var(--ink);font-size:1.4rem;line-height:1;cursor:pointer;z-index:2}
+.sheet .big{aspect-ratio:3/2;background:var(--soft)}
+.sheet .big img{width:100%;height:100%;object-fit:cover;display:block}
+.sb{padding:22px 24px 26px;display:flex;flex-direction:column;gap:18px}
+.sb h2{font-size:1.6rem;letter-spacing:-.03em;line-height:1.15}
+.sb .where{color:var(--muted);margin-top:4px}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 24px;margin:0}
+.facts div{border-top:1px solid var(--line);padding-top:8px}
+.facts dt{color:var(--muted);font-size:.8rem}
+.facts dd{margin:0;font-weight:600}
+.inc{margin:0;padding-left:1.1em}.inc li{margin-block:3px}
+.total{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:14px}
+.total b{font-size:1.8rem;letter-spacing:-.03em}.total span{color:var(--muted)}
+.acts{display:flex;flex-wrap:wrap;gap:10px}
+.btn{border-radius:10px;padding:12px 18px;font-weight:700;font-size:1rem;cursor:pointer;text-decoration:none;border:1.5px solid var(--ink);color:var(--ink);background:transparent;display:inline-block}
+.btn.main{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.beta-note{color:var(--muted);font-size:.9rem}
+
+.foot{background:var(--bg);color:var(--ink);border-top:1px solid var(--line);margin-top:40px;padding-block:36px}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;align-items:flex-start}
+.foot .brand{color:var(--deep-ink)}
+.foot p{font-size:.85rem;color:var(--muted);max-width:62ch}
+.foot p+p{margin-top:6px}
+@media (max-width:600px){.frow{grid-template-columns:56px minmax(0,1fr) auto}.frow a{grid-column:2/-1}.sb{padding-inline:18px}}
+
+.codebar{background:var(--sun);color:#0C1A33;text-align:center;font-weight:600;padding:8px 20px;font-size:.92rem}
+.app.viewing .landing,.app.viewing .thread,.app.viewing .dock{display:none}
+.app:not(.viewing) .dview{display:none}
+.dview{padding-block:24px 8px}
+.back{background:none;border:0;color:var(--muted);font-size:.95rem;cursor:pointer;padding:6px 0;margin-bottom:12px}
+.back:hover{color:var(--ink)}
+.dtop{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:start}
+.dimg{aspect-ratio:3/2;border-radius:18px;overflow:hidden;background:var(--soft)}
+.dimg img{width:100%;height:100%;object-fit:cover;display:block}
+.dwhere{color:var(--muted)}
+.dinfo h2{font-size:clamp(2rem,4.4vw,3rem);letter-spacing:-.04em;line-height:1.05;font-weight:800}
+.ddesc{color:var(--muted);font-size:1.1rem;margin-top:10px;max-width:46ch}
+.dinfo .facts{margin-top:20px}
+.dinfo .btn{margin-top:20px}
+.temps{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;margin-top:28px}
+.tm{background:var(--soft);border-radius:10px;padding:8px 2px;text-align:center;display:flex;flex-direction:column;font-size:.8rem}
+.tm b{font-size:1rem}.tm span{color:var(--muted)}
+.lsec{margin-top:40px}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px;margin-top:20px}
+.rec{background:var(--soft);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.rcat{align-self:flex-start;font-size:.78rem;font-weight:700;background:var(--bg);border-radius:99px;padding:2px 10px}
+.rec h3{font-size:1.1rem;letter-spacing:-.02em;line-height:1.25}
+.rsub{color:var(--muted);font-size:.9rem}
+.rwhy{margin-top:2px}
+.rby{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:12px;font-size:.88rem;color:var(--muted);flex-wrap:wrap}
+.chip{border:1.5px dashed var(--accent);background:var(--bg);color:var(--accent);font-weight:700;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:.85rem}
+.chip:hover{background:var(--accent);color:var(--accent-ink)}
+@media (max-width:860px){.dtop{grid-template-columns:1fr}.temps{grid-template-columns:repeat(6,minmax(0,1fr))}}
+
+.lp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+.lp h2{font-size:clamp(1.6rem,3.2vw,2.3rem);letter-spacing:-.03em;font-weight:800;line-height:1.1;text-wrap:balance}
+.lead2{color:var(--muted);font-size:1.05rem;margin-top:14px;max-width:48ch}
+.lp-list{margin:18px 0 0;padding-left:1.1em}.lp-list li{margin-block:6px}
+.lp-card{background:var(--soft);border-radius:20px;padding:22px}
+.lp-card form{display:grid;gap:12px}
+.lp-card label{display:grid;gap:4px;font-size:.88rem;font-weight:600}
+.lp-card input,.lp-card select{font-size:1rem;padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.lp-card input:focus,.lp-card select:focus{outline:none;border-color:var(--accent)}
+.lo{margin-top:18px;border-top:1px solid var(--line);padding-top:16px;display:grid;gap:10px}
+.lo-t{color:var(--muted);font-size:.88rem}
+.lo-code{font-size:1.8rem;font-weight:800;letter-spacing:-.02em}
+.lo-earn{font-weight:700;color:var(--accent)}
+@media (max-width:860px){.lp{grid-template-columns:1fr}}
+
+.codebox{border:1.5px dashed var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:8px}
+.cb-l{font-size:.85rem;font-weight:600}
+.cb-row{display:flex;gap:8px}
+.cb-row input{flex:1;min-width:0;font-size:1rem;padding:10px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+.cb-row input:focus{outline:none;border-color:var(--accent)}
+.cb-msg{font-size:.88rem;color:var(--muted);min-height:1.2em}
+.cb-msg.ok{color:#127a3a;font-weight:600}
+.dfilters{flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.dfilters .tab{padding:8px 16px;border-radius:99px;background:var(--soft);border:0;margin:0;font-size:.95rem}
+.dfilters .tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.sec.soft .dfilters .tab{background:var(--bg)}
+.sec.soft .dfilters .tab[aria-selected="true"]{background:var(--ink)}
+.dest small+small{opacity:.75}
+.rbtn{border:0;text-align:left;font:inherit;color:inherit;cursor:pointer;width:100%}
+.sec.soft .rec{background:var(--bg);border:1px solid var(--line)}
+.rby .ok{color:#127a3a;font-weight:700}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 48 48">
+    <rect width="48" height="48" rx="13" fill="#0C1A33"/>
+    <circle cx="35" cy="14" r="5.5" fill="#FFC53D"/>
+    <path d="M8 31c6-1 9-6 15-6s7 4 10 4" fill="none" stroke="#8EA8FF" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 5"/>
+    <path d="M10 37 38 21 24 38l-3-9z" fill="#fff"/>
+    <path d="M21 29 38 21 24 38z" fill="#C9D4F5"/>
+  </symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <button class="brand" id="home" type="button" aria-label="Kur skrisim, į pradžią"><svg><use href="#logo"/></svg>Kur skrisim</button>
+    <span class="beta">demo</span>
+    <nav>
+      <a href="#kryptys">Kryptys</a>
+      <a href="#rekomendacijos">Rekomendacijos</a>
+      <a href="#kaip">Kaip tai veikia</a>
+      <a href="#kodel">Kodėl mes</a>
+    </nav>
+  </div>
+</header>
+
+<div class="app" id="app">
+  <section class="hero landing" id="hero">
+    <div class="wrap">
+      <div>
+        <h1>Kur ilsėsimės?</h1>
+        <p class="lead">Poilsis, aktyvi veikla ar miesto savaitgalis? Pasirink kryptį ir gauk patikrintų vietinių rekomendacijas: kur apsistoti, ką valgyti ir ką veikti. Arba parašyk vienu sakiniu, ko nori.</p>
+        <div class="slot-hero" id="slotHero">
+          <form class="ask" id="ask" autocomplete="off">
+            <input id="q" type="text" maxlength="300" placeholder="pvz. viskas įskaičiuota prie jūros lapkričio 20, dviese" aria-label="Ko ieškai?">
+            <button type="submit" aria-label="Ieškoti"><span>Ieškoti</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </form>
+        </div>
+        <div class="links" id="try"></div>
+      </div>
+      <div class="collage" aria-hidden="true">
+        <figure class="a"><img src="images/her.jpg" alt=""><figcaption>Kreta</figcaption></figure>
+        <figure class="b"><img src="images/bcn.jpg" alt=""><figcaption>Barselona</figcaption></figure>
+        <figure class="c"><img src="images/mla.jpg" alt=""><figcaption>Malta</figcaption></figure>
+        <figure class="d"><img src="images/ski.jpg" alt=""><figcaption>Bansko</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec landing" id="kryptys">
+    <div class="wrap">
+      <div class="sec-h"><h2>Kur skristi iš Vilniaus</h2><span>Paspausk ir pamatyk rekomendacijas</span></div>
+      <div class="tabs dfilters" id="dfilters" role="tablist"></div>
+      <div class="dgrid" id="dests"></div>
+    </div>
+  </section>
+
+  <section class="sec soft landing" id="rekomendacijos">
+    <div class="wrap">
+      <div class="sec-h"><h2>Rekomendacijos</h2><span>Iš patikrintų žmonių, kurie ten gyvena</span></div>
+      <div class="tabs dfilters" id="rfilters" role="tablist"></div>
+      <div class="rgrid" id="recGrid"></div>
+    </div>
+  </section>
+
+  <section class="sec landing" id="populiaru"><div class="wrap" id="peek"></div></section>
+
+  <section class="sec soft landing" id="kaip">
+    <div class="wrap">
+      <div class="sec-h"><h2>Kaip tai veikia</h2></div>
+      <ol class="steps">
+        <li><h3>Pasirink kryptį</h3><p>Pagal poilsio tipą: jūra, aktyvi veikla, miestas ar slidinėjimas.</p><q>„Aktyvi veikla“</q></li>
+        <li><h3>Skaityk rekomendacijas</h3><p>Kur apsistoti, pavalgyti ir ką veikti. Rašo ten gyvenantys, patikrinti žmonės.</p><q>„Tapas už 12 € Sant Antoni“</q></li>
+        <li><h3>Rask kelialapį ar skrydį</h3><p>Pokalbis parodo pasiūlymus iš Vilniaus pagal tavo datas ir biudžetą.</p><q>„Barselona gruodį, dviese“</q></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec soft landing" id="kodel">
+    <div class="wrap">
+      <div class="sec-h"><h2>Kodėl Kur skrisim</h2></div>
+      <div class="why">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>
+          <h3>Paprasta kaip žinutė</h3><p>Nereikia mokytis paieškos formų. Rašai taip, kaip kalbėtum su kelionių agentu.</p>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.5"/></svg>
+          <h3>Orai pagal tavo datas</h3><p>Prie kiekvieno pasiūlymo rodome, kiek apie laipsnių bus tomis dienomis, ne metų vidurkį.</p>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h14M12 6l6 6-6 6"/><path d="M3 5h8M3 19h8" opacity=".5"/></svg>
+          <h3>Skrydžiai vienu paspaudimu</h3><p>Jei kelionę renkiesi pats, atidarome paiešką su jau įvestais maršrutu ir datomis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec landing">
+    <div class="wrap">
+      <div class="cta">
+        <h2>Ar jau žinai, kada nori išvykti?</h2>
+        <button type="button" id="ctaBtn">Pradėti paiešką</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap dview" id="destView" hidden></section>
+
+  <main class="wrap thread" id="thread" aria-live="polite"></main>
+  <div class="wrap dock" id="dock"></div>
+
+  <footer class="foot">
+    <div class="wrap">
+      <span class="brand"><svg><use href="#logo"/></svg>Kur skrisim</span>
+      <div>
+        <p>Demonstracinė versija. Kelialapių pasiūlymai, viešbučiai ir kainos pavyzdiniai. Skrydžių paieškos nuorodos veikia tikrai.</p>
+        <p id="credits"></p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div class="veil" id="veil" hidden>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var IMG = {}; ['bcn','fco','lis','agp','her','ayt','tfs','hrg','dxb','prg','mla','bud','ski'].forEach(function (k) { IMG[k] = 'images/' + k + '.jpg'; });
+  var CREDIT = {
+    bcn: 'Unsplash', fco: 'Mathew Schwartz', lis: 'Etienne Gobeli', agp: 'Sandro Gonzalez', her: 'Karsten Winegeart',
+    ayt: 'engin akyurt', tfs: 'Iancu Voinovan', hrg: 'Kaŕeem Saleh', dxb: 'Simon Spring', prg: 'Dmitry Goykolov',
+    mla: 'SnapSaga', bud: 'Krisztian Tabori', ski: 'Velina Bozhilova'
+  };
+
+  var ORIGIN = { code: 'VNO', name: 'Vilnius' };
+  var SHORT = ['saus.', 'vas.', 'kov.', 'bal.', 'geg.', 'birž.', 'liep.', 'rugp.', 'rugs.', 'spal.', 'lapkr.', 'gruod.'];
+  var MONTH_ACC = ['sausį', 'vasarį', 'kovą', 'balandį', 'gegužę', 'birželį', 'liepą', 'rugpjūtį', 'rugsėjį', 'spalį', 'lapkritį', 'gruodį'];
+  var BOARD = { AI: 'Viskas įskaičiuota', HB: 'Pusryčiai ir vakarienė', BB: 'Pusryčiai', RO: 'Be maitinimo' };
+
+  /* Sezoniškumo koeficientai pagal mėnesį (sausis–gruodis) */
+  var SEASON = {
+    summer: [0.72, 0.70, 0.75, 0.88, 1.00, 1.18, 1.42, 1.50, 1.20, 0.95, 0.76, 0.82],
+    city:   [0.85, 0.85, 0.90, 1.00, 1.05, 1.10, 1.20, 1.20, 1.10, 1.00, 0.88, 0.95],
+    tfs:    [1.15, 1.15, 1.10, 1.00, 0.85, 0.85, 1.00, 1.05, 0.90, 0.95, 1.00, 1.20],
+    dxb:    [1.20, 1.20, 1.10, 0.95, 0.70, 0.60, 0.60, 0.60, 0.70, 0.95, 1.15, 1.30],
+    hrg:    [1.00, 1.00, 1.00, 1.00, 0.95, 0.90, 1.00, 1.05, 1.00, 1.00, 1.00, 1.10],
+    ski:    [1.30, 1.25, 1.10, 0.80, 0.70, 0.70, 0.70, 0.70, 0.70, 0.75, 0.90, 1.30]
+  };
+  var FSEASON = [0.85, 0.85, 0.90, 1.00, 1.05, 1.15, 1.35, 1.40, 1.10, 1.00, 0.90, 1.05];
+
+  /* fl: grįžtamojo skrydžio bazinė kaina, pk: kelialapiai (n = viešbučio kaina vienam asmeniui už naktį) */
+  var DESTS = [
+    { id: 'bcn', name: 'Barselona', country: 'Ispanija', iata: 'BCN', kind: 'city', fl: { p: 95, dur: '3 val. 25 min', st: 'tiesioginis' },
+      tags: ['city','culture','food','party','romantic','beach'], re: /barselon/,
+      t: [14,15,17,19,22,26,29,29,26,22,17,15], r: [4,4,5,6,6,4,2,4,5,6,5,4],
+      pk: [ { h: 'Hotel Gràcia Nord', s: 3, b: 'BB', n: 48, op: 'Saulės Kelionės', area: 'Gràcia' },
+            { h: 'Casa Ciutadella', s: 4, b: 'BB', n: 78, op: 'Vėjo Rožė', area: 'Ciutadella' },
+            { h: 'Hotel Eixample 1905', s: 4, b: 'BB', n: 92, op: 'Marių Takas', area: 'Eixample' } ] },
+    { id: 'fco', name: 'Roma', country: 'Italija', iata: 'FCO', kind: 'city', fl: { p: 85, dur: '2 val. 50 min', st: 'tiesioginis' },
+      tags: ['city','culture','food','romantic'], re: /\brom(a|os|oje|ai|on|a)\b/,
+      t: [12,13,16,19,24,28,31,31,27,22,16,13], r: [7,7,7,8,6,4,2,3,5,8,9,8],
+      pk: [ { h: 'Albergo Trastevere', s: 3, b: 'BB', n: 52, op: 'Aitvaras Travel', area: 'Trastevere' },
+            { h: 'Hotel Monti Antica', s: 4, b: 'BB', n: 84, op: 'Saulės Kelionės', area: 'Monti' } ] },
+    { id: 'lis', name: 'Lisabona', country: 'Portugalija', iata: 'LIS', kind: 'city', fl: { p: 120, dur: '5 val. 40 min', st: '1 persėdimas' },
+      tags: ['city','culture','food','beach'], re: /lisabon/,
+      t: [15,16,18,20,23,26,28,29,27,23,18,15], r: [9,8,8,9,6,3,1,1,4,8,9,10],
+      pk: [ { h: 'Pensão Alfama', s: 3, b: 'BB', n: 44, op: 'Vėjo Rožė', area: 'Alfama' },
+            { h: 'Hotel Baixa Azul', s: 4, b: 'BB', n: 70, op: 'Pietų Vėjas', area: 'Baixa' } ] },
+    { id: 'agp', name: 'Malaga', country: 'Ispanija', iata: 'AGP', kind: 'summer', fl: { p: 130, dur: '4 val. 30 min', st: 'tiesioginis' },
+      tags: ['beach','relax','warm','food'], re: /malag|kosta del sol/,
+      t: [17,18,20,22,25,29,31,31,28,24,20,18], r: [5,5,5,5,3,1,0,0,2,5,5,6],
+      pk: [ { h: 'Costa Sol Beach', s: 4, b: 'AI', n: 78, op: 'Saulės Kelionės', area: 'Torremolinos', tr: 1 },
+            { h: 'Hotel Malagueta Mar', s: 4, b: 'HB', n: 66, op: 'Marių Takas', area: 'La Malagueta', tr: 1 },
+            { h: 'Playa Dorada Resort', s: 5, b: 'AI', n: 128, op: 'Pietų Vėjas', area: 'Marbella', tr: 1 } ] },
+    { id: 'her', name: 'Kreta', country: 'Graikija', iata: 'HER', kind: 'summer', fl: { p: 140, dur: '3 val. 50 min', st: 'tiesioginis' },
+      tags: ['beach','culture','relax','warm'], re: /kret/,
+      t: [15,15,17,20,24,28,30,30,27,24,20,17], r: [9,7,6,3,2,0,0,0,2,4,6,9],
+      pk: [ { h: 'Aegean Pearl', s: 4, b: 'AI', n: 76, op: 'Saulės Kelionės', area: 'Heraklionas', tr: 1 },
+            { h: 'Kalo Nero Resort', s: 5, b: 'AI', n: 138, op: 'Marių Takas', area: 'Elounda', tr: 1 },
+            { h: 'Villa Elia Studios', s: 3, b: 'RO', n: 36, op: 'Aitvaras Travel', area: 'Malia', tr: 1 } ] },
+    { id: 'ayt', name: 'Antalija', country: 'Turkija', iata: 'AYT', kind: 'summer', fl: { p: 160, dur: '4 val. 10 min', st: 'tiesioginis' },
+      tags: ['beach','relax','warm'], re: /antalij|turkij/,
+      t: [15,16,19,23,28,33,36,36,33,28,21,17], r: [11,9,7,5,3,1,0,0,1,4,6,10],
+      pk: [ { h: 'Lara Palm Beach', s: 5, b: 'AI', n: 92, op: 'Saulės Kelionės', area: 'Lara', tr: 1 },
+            { h: 'Turquoise Park Hotel', s: 4, b: 'AI', n: 64, op: 'Pietų Vėjas', area: 'Kundu', tr: 1 },
+            { h: 'Konyaaltı Garden', s: 4, b: 'AI', n: 58, op: 'Vėjo Rožė', area: 'Konyaaltı', tr: 1 } ] },
+    { id: 'tfs', name: 'Tenerifė', country: 'Ispanija', iata: 'TFS', kind: 'tfs', fl: { p: 190, dur: '7 val. 55 min', st: '1 persėdimas' },
+      tags: ['beach','nature','warm','relax'], re: /tenerif|kanar/,
+      t: [21,21,22,22,24,25,27,28,27,26,24,22], r: [3,3,3,2,1,0,0,0,1,3,3,4],
+      pk: [ { h: 'Costa Adeje Sunrise', s: 4, b: 'HB', n: 72, op: 'Marių Takas', area: 'Costa Adeje', tr: 1 },
+            { h: 'Playa del Sur Resort', s: 4, b: 'AI', n: 90, op: 'Saulės Kelionės', area: 'Los Cristianos', tr: 1 } ] },
+    { id: 'hrg', name: 'Hurgada', country: 'Egiptas', iata: 'HRG', kind: 'hrg', fl: { p: 220, dur: '5 val. 05 min', st: 'tiesioginis' },
+      tags: ['beach','warm','relax'], re: /hurgad|egipt/,
+      t: [22,23,26,30,34,36,38,37,35,31,27,23], r: [0,0,0,0,0,0,0,0,0,0,0,0],
+      pk: [ { h: 'Red Coral Resort', s: 5, b: 'AI', n: 66, op: 'Saulės Kelionės', area: 'Sahl Hasheesh', tr: 1 },
+            { h: 'Sahl Bay Hotel', s: 4, b: 'AI', n: 48, op: 'Vėjo Rožė', area: 'Sahl Hasheesh', tr: 1 },
+            { h: 'Marina Breeze', s: 4, b: 'AI', n: 55, op: 'Pietų Vėjas', area: 'Hurgados marina', tr: 1 } ] },
+    { id: 'dxb', name: 'Dubajus', country: 'JAE', iata: 'DXB', kind: 'dxb', fl: { p: 260, dur: '5 val. 50 min', st: 'tiesioginis' },
+      tags: ['city','warm','beach','relax'], re: /dubaj/,
+      t: [24,26,29,34,39,41,43,43,40,37,31,26], r: [2,2,2,1,0,0,0,0,0,0,1,2],
+      pk: [ { h: 'Marina Heights', s: 4, b: 'BB', n: 95, op: 'Marių Takas', area: 'Dubai Marina', tr: 1 },
+            { h: 'Palm Jumeirah Suites', s: 5, b: 'BB', n: 170, op: 'Saulės Kelionės', area: 'Palm Jumeirah', tr: 1 } ] },
+    { id: 'prg', name: 'Praha', country: 'Čekija', iata: 'PRG', kind: 'city', fl: { p: 70, dur: '1 val. 50 min', st: 'tiesioginis' },
+      tags: ['city','culture','food','party'], re: /prah/,
+      t: [2,4,9,15,20,23,25,25,20,14,7,3], r: [7,6,7,6,8,8,8,7,6,6,7,7],
+      pk: [ { h: 'Hotel Malá Strana', s: 4, b: 'BB', n: 64, op: 'Aitvaras Travel', area: 'Malá Strana' },
+            { h: 'Old Town Inn', s: 3, b: 'BB', n: 40, op: 'Vėjo Rožė', area: 'Senamiestis' } ] },
+    { id: 'mla', name: 'Malta', country: 'Malta', iata: 'MLA', kind: 'summer', fl: { p: 120, dur: '3 val. 30 min', st: 'tiesioginis' },
+      tags: ['beach','culture','warm','relax'], re: /\bmalt(a|os|oje|on|ai|e|o)\b/,
+      t: [16,16,18,20,25,29,32,32,29,25,21,18], r: [9,7,6,4,2,1,0,1,4,7,8,10],
+      pk: [ { h: "St. Julian's Bay Hotel", s: 4, b: 'BB', n: 70, op: 'Pietų Vėjas', area: "St. Julian's", tr: 1 },
+            { h: 'Valletta Harbour House', s: 4, b: 'BB', n: 82, op: 'Marių Takas', area: 'Valeta' } ] },
+    { id: 'bud', name: 'Budapeštas', country: 'Vengrija', iata: 'BUD', kind: 'city', fl: { p: 75, dur: '1 val. 55 min', st: 'tiesioginis' },
+      tags: ['city','party','relax','food'], re: /budapest/,
+      t: [3,6,12,18,23,26,28,28,23,16,8,4], r: [7,6,6,7,8,8,6,6,5,6,7,7],
+      pk: [ { h: 'Hotel Danubius Park', s: 4, b: 'BB', n: 52, op: 'Aitvaras Travel', area: 'Pesto centras' },
+            { h: 'Pest Central', s: 3, b: 'BB', n: 36, op: 'Saulės Kelionės', area: 'Erzsébetváros' } ] },
+    { id: 'ski', name: 'Bansko', country: 'Bulgarija', iata: 'SOF', kind: 'ski', fl: { p: 90, dur: '2 val. 10 min', st: 'tiesioginis, iki Sofijos' },
+      tags: ['ski','nature'], re: /sofij|bansk|bulgarij/,
+      t: [0,2,6,12,17,21,24,24,19,13,6,1], r: [8,8,9,10,11,9,7,6,6,7,9,9],
+      pk: [ { h: 'Pirin Lodge', s: 3, b: 'HB', n: 42, op: 'Aitvaras Travel', area: 'prie keltuvų', tr: 1 },
+            { h: 'Chalet Vihren', s: 4, b: 'HB', n: 62, op: 'Vėjo Rožė', area: 'Bansko centras', tr: 1 },
+            { h: 'Bansko Alpine Spa', s: 4, b: 'HB', n: 74, op: 'Marių Takas', area: 'prie gondolos', tr: 1 } ] }
+  ];
+
+  var TAG_LABEL = { beach: 'pliažai', city: 'miestas', culture: 'kultūra', food: 'maistas', party: 'vakarėliai', romantic: 'romantika', relax: 'poilsis', nature: 'gamta', ski: 'slidinėjimas', warm: 'šiluma' };
+  var INTENTS = [
+    ['beach',    /pliaz|\bjur|paplud|maudy|saul|kurort/],
+    ['warm',     /silt|silum|silc|karst/],
+    ['ski',      /slid|snieg/],
+    ['nature',   /gamt|zygi|ezer|vulkan|kalnu|kalnai/],
+    ['city',     /\bmiest|architekt|apsipirk|kaviner/],
+    ['culture',  /muzie|istor|kultur|paminkl/],
+    ['food',     /maist|vyn[oua]|kulinar|restoran|gastronom/],
+    ['party',    /vakarel|klub|naktin|linksm/],
+    ['romantic', /romant|medaus|poroj/],
+    ['relax',    /poil|ramyb|\bspa\b|atsipal/]
+  ];
+  var MONTH_RES = [
+    /\bsausi/, /\bvasari/, /\bkov(a|o|as)\b/, /\bbalandz|\bbalandi/, /\bgegu/, /\bbirzel/,
+    /\bliep(a|os)\b/, /\brugpj|\brugpiut/, /\brugsej|\brugseji/, /\bspal(i|io|is)\b/, /\blapkr/, /\bgruod/
+  ];
+
+  var pad = function (n) { return String(n).padStart(2, '0'); };
+  var iso = function (d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
+  var yymmdd = function (d) { return String(d.getFullYear()).slice(2) + pad(d.getMonth() + 1) + pad(d.getDate()); };
+  var addDays = function (d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; };
+  var norm = function (s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); };
+  var dayStart = function (d) { var x = new Date(d); x.setHours(0, 0, 0, 0); return x; };
+  var eur = function (n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' €'; };
+  var hash = function (s) { var h = 7; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 100003; return h; };
+
+  function newCtx() {
+    return { month: null, day: null, year: null, isoStart: null, days: null, pax: null, interests: [], budget: false,
+             maxBudget: null, named: [], board: null, stars: null, tab: null, asked: false, offset: 0, shown: false };
+  }
+  function cloneCtx(c) { var x = Object.assign({}, c); x.interests = c.interests.slice(); x.named = c.named.slice(); return x; }
+  function signature(c) { return JSON.stringify([c.month, c.day, c.year, c.isoStart, c.days, c.pax, c.interests.slice().sort(), c.budget, c.maxBudget, c.named, c.board, c.stars, c.tab]); }
+
+  /* ---------- Teksto supratimas ---------- */
+  function parseMessage(raw, prev, today) {
+    var t = norm(raw), c = cloneCtx(prev), m;
+    m = t.match(/(20\d\d)-(\d\d)-(\d\d)/);
+    if (m) {
+      c.year = +m[1]; c.month = +m[2] - 1; c.day = +m[3]; c.isoStart = null;
+    } else {
+      var found = -1, mm = null;
+      for (var i = 0; i < MONTH_RES.length; i++) { mm = MONTH_RES[i].exec(t); if (mm) { found = i; break; } }
+      if (found >= 0) {
+        c.month = found; c.year = null; c.isoStart = null; c.day = null;
+        var after = t.slice(mm.index + mm[0].length), before = t.slice(0, mm.index);
+        var d1 = after.match(/^[a-z]*\s*(\d{1,2})(?!\d)(?!\s*(?:dien|nakt|zmon|asmen|eur|keleiv|zvaig))/);
+        var d2 = before.match(/(\d{1,2})\s*(?:d\.?)?\s*$/);
+        var dd = d1 ? +d1[1] : (d2 ? +d2[1] : null);
+        if (dd && dd >= 1 && dd <= 31) c.day = dd;
+      } else if (/pavasar/.test(t)) { c.month = 3; c.day = null; c.year = null; c.isoStart = null; }
+      else if (/\bvasara|\bvasaros/.test(t)) { c.month = 6; c.day = null; c.year = null; c.isoStart = null; }
+      else if (/ruden/.test(t)) { c.month = 9; c.day = null; c.year = null; c.isoStart = null; }
+      else if (/\bziem/.test(t)) { c.month = 0; c.day = null; c.year = null; c.isoStart = null; }
+      else if (/savaitgal/.test(t)) {
+        var delta = (5 - today.getDay() + 7) % 7 || 7;
+        c.isoStart = iso(addDays(today, delta)); c.month = null; c.day = null;
+      }
+    }
+    var dur = t.match(/(\d{1,2})\s*(?:dien|nakt)/);
+    if (dur) c.days = Math.min(21, Math.max(2, +dur[1]));
+    else if (/savaitgal/.test(t)) c.days = 3;
+    else if (/dvi savait|2 savait/.test(t)) c.days = 15;
+    else if (/savait/.test(t)) c.days = 8;
+
+    var px = t.match(/(\d)\s*(?:zmon|asmen|keleiv|suaug)/);
+    if (px) c.pax = +px[1];
+    else if (/\bdviese|poroje|\bporele/.test(t)) c.pax = 2;
+    else if (/\btrise/.test(t)) c.pax = 3;
+    else if (/keturiese/.test(t)) c.pax = 4;
+    else if (/\bvienas\b|\bvieni\b|\bsolo\b/.test(t)) c.pax = 1;
+
+    var mb = t.match(/(\d{2,4})\s*(?:€|eur)/);
+    if (mb) { c.maxBudget = +mb[1]; if (c.maxBudget <= 500) c.budget = true; }
+    if (/\bpig(i|us|iau)|nebrang|ekonom|taupy/.test(t)) c.budget = true;
+
+    if (/viskas iskaiciuota|all inclusive|\bai\b/.test(t)) c.board = 'AI';
+    else if (/pusryc/.test(t)) c.board = 'BB';
+    var st = t.match(/(\d)\s*(?:zvaig|\*)/);
+    if (st) c.stars = +st[1]; else if (/prabang/.test(t)) c.stars = 5;
+    if (/tik skryd|skrydzio bilet|patys|pats pirk|be viesbut/.test(t)) c.tab = 'flights';
+    else if (/kelialap|paket/.test(t)) c.tab = 'packages';
+
+    INTENTS.forEach(function (p) { if (p[1].test(t) && c.interests.indexOf(p[0]) === -1) c.interests.push(p[0]); });
+    DESTS.forEach(function (d) { if (d.re.test(t) && c.named.indexOf(d.id) === -1) c.named.push(d.id); });
+    return c;
+  }
+
+  function beachy(c) { return c.interests.indexOf('beach') !== -1 || c.interests.indexOf('relax') !== -1 || c.interests.indexOf('warm') !== -1; }
+  function resolveDates(c, today) {
+    var days = c.days || (beachy(c) ? 8 : 5), start = null, approx = false;
+    if (c.isoStart) start = new Date(c.isoStart + 'T00:00:00');
+    else if (c.month !== null) {
+      var y = c.year || today.getFullYear();
+      start = new Date(y, c.month, c.day || 15); approx = !c.day;
+      if (!c.year && start < addDays(today, 2)) {
+        if (!c.day && c.month === today.getMonth()) start = addDays(today, 7);
+        else start = new Date(y + 1, c.month, c.day || 15);
+      }
+    }
+    if (!start) return null;
+    return { start: start, end: addDays(start, days - 1), days: days, nights: days - 1, approx: approx };
+  }
+
+  /* ---------- Vertinimas ir pasiūlymai ---------- */
+  function weatherFor(d, dates) {
+    var s = 0, n = dates.days;
+    for (var i = 0; i < n; i++) s += d.t[addDays(dates.start, i).getMonth()];
+    var rain = 0;
+    for (var j = 0; j < n; j++) rain += d.r[addDays(dates.start, j).getMonth()] / 30;
+    return { temp: s / n, rain: rain, n: n };
+  }
+  function interestScore(d, c) {
+    var s = 0;
+    c.interests.forEach(function (t) { if (d.tags.indexOf(t) !== -1) s += 3; });
+    var wantsSki = c.interests.indexOf('ski') !== -1;
+    if (wantsSki) { if (d.tags.indexOf('ski') === -1) s -= 100; } else if (d.tags.indexOf('ski') !== -1) s -= 6;
+    if (c.budget) { var cheap = d.fl.p <= 100 ? 4 : d.fl.p <= 150 ? 1 : -3; s += cheap; }
+    return s;
+  }
+  function weatherScore(w, c) {
+    var warm = beachy(c);
+    var range = c.interests.indexOf('ski') !== -1 ? [-12, 3] : warm ? [24, 34] : [14, 27];
+    var dist = w.temp < range[0] ? range[0] - w.temp : (w.temp > range[1] ? w.temp - range[1] : 0);
+    return 10 - dist * 0.9 - 6 * (w.rain / w.n);
+  }
+  function rankDests(c, dates) {
+    var list = DESTS.map(function (d) { var w = weatherFor(d, dates); return { d: d, w: w, score: interestScore(d, c) + weatherScore(w, c) }; });
+    if (c.named.length) list = list.filter(function (x) { return c.named.indexOf(x.d.id) !== -1; });
+    return list.sort(function (a, b) { return b.score - a.score; });
+  }
+  function skiClosed(d, dates) { return d.kind === 'ski' && [3,4,5,6,7,8,9].indexOf(dates.start.getMonth()) !== -1; }
+
+  function pkgPrice(d, p, dates) {
+    var m = dates.start.getMonth();
+    return Math.round((d.fl.p * 0.9 + dates.nights * p.n) * SEASON[d.kind][m] / 5) * 5;
+  }
+  function flightPrice(d, dates) {
+    var m = dates.start.getMonth(), v = 0.93 + (hash(d.iata + iso(dates.start)) % 15) / 100;
+    return Math.round(d.fl.p * FSEASON[m] * v);
+  }
+  function buildOffers(c, dates, ranked) {
+    var pk = [], fl = [];
+    ranked.forEach(function (x, idx) {
+      var d = x.d;
+      fl.push({ d: d, w: x.w, price: flightPrice(d, dates), rank: idx });
+      if (skiClosed(d, dates)) return;
+      d.pk.forEach(function (p) {
+        if (c.board && p.b !== c.board && !(c.board === 'BB' && p.b === 'HB')) return;
+        if (c.stars && p.s < c.stars) return;
+        pk.push({ d: d, p: p, w: x.w, price: pkgPrice(d, p, dates), rank: idx });
+      });
+    });
+    var cap = c.maxBudget;
+    var pk2 = cap ? pk.filter(function (o) { return o.price <= cap; }) : pk;
+    var fl2 = cap ? fl.filter(function (o) { return o.price <= cap; }) : fl;
+    return { pk: pk2, fl: fl2, relaxed: cap && (!pk2.length && !fl2.length), all: { pk: pk, fl: fl } };
+  }
+  function sortOffers(list, mode) {
+    var a = list.slice();
+    if (mode === 'cheap') a.sort(function (x, y) { return x.price - y.price; });
+    else if (mode === 'warm') a.sort(function (x, y) { return y.w.temp - x.w.temp; });
+    else a.sort(function (x, y) { return x.rank - y.rank || x.price - y.price; });
+    return a;
+  }
+
+  /* ---------- Tekstai ir nuorodos ---------- */
+  function rangeText(dates) {
+    var a = dates.start, b = dates.end;
+    if (dates.days === 1) return a.getDate() + ' ' + SHORT[a.getMonth()];
+    if (a.getMonth() === b.getMonth()) return a.getDate() + '–' + b.getDate() + ' ' + SHORT[b.getMonth()];
+    return a.getDate() + ' ' + SHORT[a.getMonth()] + ' – ' + b.getDate() + ' ' + SHORT[b.getMonth()];
+  }
+  function paxText(n) { return n === 1 ? '1 keleivis' : n + ' keleiviai'; }
+  function stars(n) { return new Array(n + 1).join('★'); }
+  function flightLinks(d, dates, pax) {
+    var o = ORIGIN.code;
+    var q = 'Flights from ' + o + ' to ' + d.iata + ' on ' + iso(dates.start) + ' through ' + iso(dates.end);
+    return {
+      google: 'https://www.google.com/travel/flights?q=' + encodeURIComponent(q),
+      sky: 'https://www.skyscanner.net/transport/flights/' + o.toLowerCase() + '/' + d.iata.toLowerCase() + '/' + yymmdd(dates.start) + '/' + yymmdd(dates.end) + '/?adultsv2=' + pax
+    };
+  }
+
+  if (typeof document === 'undefined') {
+    globalThis.__kw = { parseMessage: parseMessage, resolveDates: resolveDates, rankDests: rankDests, buildOffers: buildOffers, newCtx: newCtx, sortOffers: sortOffers, iso: iso, rangeText: rangeText, DESTS: DESTS };
+    return;
+  }
+
+  /* ---------- Sąsaja ---------- */
+  var $ = function (id) { return document.getElementById(id); };
+  var app = $('app'), thread = $('thread'), form = $('ask'), input = $('q'), dock = $('dock'), veil = $('veil'), sheet = $('sheet');
+  var ctx = newCtx(), busy = false, lastFocus = null;
+
+  function h(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; }
+  function photo(id, alt) { var i = document.createElement('img'); i.src = IMG[id]; i.alt = alt || ''; i.loading = 'lazy'; i.decoding = 'async'; return i; }
+  function bottom() {
+    var last = thread.lastElementChild;
+    if (last) last.scrollIntoView({ block: 'end', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+
+  function pkgCard(o, dates, pax) {
+    var d = o.d, p = o.p;
+    var b = h('button', 'card'); b.type = 'button';
+    var ph = h('div', 'ph'); var im = photo(d.id, d.name); var vi = d.pk.indexOf(p);
+    if (vi > 0) { im.style.setProperty('--z', '1.4'); im.style.setProperty('--o', vi === 1 ? '12% 40%' : '88% 60%'); }
+    ph.appendChild(im); b.appendChild(ph);
+    var m = h('div', 'cm');
+    m.appendChild(h('span', 'where', d.name + ', ' + d.country));
+    m.appendChild(h('span', 'name', p.h));
+    m.appendChild(h('span', 'sub', stars(p.s) + ' · ' + BOARD[p.b]));
+    m.appendChild(h('span', 'sub tnum', dates.days + ' d. · ' + rangeText(dates) + ' · apie ' + Math.round(o.w.temp) + ' °C'));
+    var pr = h('div', 'price tnum'); var bb = h('b', '', eur(o.price)); pr.appendChild(bb); pr.append(' '); pr.appendChild(h('span', '', 'asm.'));
+    m.appendChild(pr);
+    b.appendChild(m);
+    b.addEventListener('click', function () { openSheet(o, dates, pax); });
+    return b;
+  }
+
+  function flightRow(o, dates, pax) {
+    var d = o.d, row = h('div', 'frow');
+    row.appendChild(photo(d.id, ''));
+    var mid = h('div');
+    mid.appendChild(h('div', 'r', ORIGIN.name + ' → ' + d.name));
+    mid.appendChild(h('div', 's tnum', rangeText(dates) + ' · ' + d.fl.st + ' · ' + d.fl.dur));
+    row.appendChild(mid);
+    var p = h('div', 'p tnum'); p.append('nuo '); p.appendChild(h('b', '', eur(o.price))); p.appendChild(h('div', '', 'į abi puses'));
+    row.appendChild(p);
+    var a = h('a', '', 'Ieškoti bilieto ↗'); a.href = flightLinks(d, dates, pax).google; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    row.appendChild(a);
+    return row;
+  }
+
+  function secHead(title, meta) { var s = h('div', 'sec-h'); s.appendChild(h('h2', '', title)); if (meta) s.appendChild(h('span', '', meta)); return s; }
+
+  function buildResults(c, dates, pax, offers, relaxedNote) {
+    var wrap = h('div', 'results');
+    var st = { tab: c.tab || 'all', sort: 'rec' };
+    var bar = h('div', 'bar'), tabs = h('div', 'tabs'); tabs.setAttribute('role', 'tablist');
+    var body = h('div', 'results');
+    var TABS = [['all', 'Visi'], ['packages', 'Kelialapiai'], ['flights', 'Tik skrydžiai']];
+    var tabEls = {};
+    TABS.forEach(function (t) {
+      var b = h('button', 'tab', t[1]); b.type = 'button'; b.setAttribute('role', 'tab');
+      b.addEventListener('click', function () { st.tab = t[0]; draw(); });
+      tabs.appendChild(b); tabEls[t[0]] = b;
+    });
+    var sortBox = h('label', 'sort'); sortBox.append('Rikiuoti ');
+    var sel = h('select'); sel.id = 'sort' + Math.random().toString(36).slice(2, 7);
+    [['rec', 'pagal tinkamumą'], ['cheap', 'nuo pigiausių'], ['warm', 'nuo šilčiausių']].forEach(function (o) { var op = h('option', '', o[1]); op.value = o[0]; sel.appendChild(op); });
+    sel.addEventListener('change', function () { st.sort = sel.value; draw(); });
+    sortBox.appendChild(sel);
+    bar.appendChild(tabs); bar.appendChild(sortBox);
+    wrap.appendChild(bar); wrap.appendChild(body);
+
+    function draw() {
+      TABS.forEach(function (t) { tabEls[t[0]].setAttribute('aria-selected', String(st.tab === t[0])); });
+      body.textContent = '';
+      var pk = sortOffers(offers.pk, st.sort), fl = sortOffers(offers.fl, st.sort);
+      var showPk = st.tab !== 'flights', showFl = st.tab !== 'packages';
+      if (showPk) {
+        var list = pk.slice(0, st.tab === 'all' ? 6 : 12);
+        var sec = h('section');
+        sec.appendChild(secHead('Kelialapiai', list.length ? 'skrydis ir viešbutis, kaina vienam asmeniui' : ''));
+        if (list.length) { var g = h('div', 'grid'); list.forEach(function (o) { g.appendChild(pkgCard(o, dates, pax)); }); sec.appendChild(g); }
+        else sec.appendChild(h('p', 'empty', 'Pagal šiuos kriterijus kelialapių nėra. Pabandyk kitą datą arba švelnesnius reikalavimus.'));
+        body.appendChild(sec);
+      }
+      if (showFl) {
+        var fls = fl.slice(0, st.tab === 'all' ? 4 : 10);
+        var s2 = h('section');
+        s2.appendChild(secHead('Pigūs skrydžiai', 'jei bilietą perki pats'));
+        if (fls.length) { var f = h('div', 'flights'); fls.forEach(function (o) { f.appendChild(flightRow(o, dates, pax)); }); s2.appendChild(f); }
+        else s2.appendChild(h('p', 'empty', 'Skrydžių pagal šį biudžetą nerasta.'));
+        s2.appendChild(h('p', 'note', 'Kainos orientacinės. Tikslią kainą ir laiką parodys paieškos puslapis.'));
+        body.appendChild(s2);
+      }
+    }
+    draw();
+    return wrap;
+  }
+
+  /* Detalės */
+  function openSheet(o, dates, pax) {
+    var d = o.d, p = o.p;
+    lastFocus = document.activeElement;
+    sheet.textContent = '';
+    var x = h('button', 'x', '×'); x.type = 'button'; x.setAttribute('aria-label', 'Uždaryti'); x.addEventListener('click', closeSheet);
+    sheet.appendChild(x);
+    var big = h('div', 'big'); big.appendChild(photo(d.id, d.name)); sheet.appendChild(big);
+    var sb = h('div', 'sb');
+    var head = h('div'); var t = h('h2', '', p.h); t.id = 'sheetTitle'; head.appendChild(t);
+    head.appendChild(h('p', 'where', stars(p.s) + ' · ' + p.area + ', ' + d.name + ', ' + d.country));
+    sb.appendChild(head);
+    var f = h('dl', 'facts');
+    [['Išvykimas', rangeText(dates)], ['Trukmė', dates.days + ' d. / ' + dates.nights + ' n.'], ['Maitinimas', BOARD[p.b]], ['Keleiviai', paxText(pax)],
+     ['Oras', 'apie ' + Math.round(o.w.temp) + ' °C dieną'], ['Pasiūlymą teikia', p.op]].forEach(function (r) {
+      var w = h('div'); w.appendChild(h('dt', '', r[0])); w.appendChild(h('dd', 'tnum', r[1])); f.appendChild(w);
+    });
+    sb.appendChild(f);
+    var inc = h('ul', 'inc');
+    ['Skrydis ' + ORIGIN.code + ' – ' + d.iata + ' – ' + ORIGIN.code + ' (' + d.fl.st + ')', 'Rankinis bagažas', 'Apgyvendinimas: ' + dates.nights + ' n., ' + BOARD[p.b].toLowerCase()]
+      .concat(p.tr ? ['Pervežimas oro uostas – viešbutis – oro uostas'] : [], ['Kelionės draudimas'])
+      .forEach(function (s) { inc.appendChild(h('li', '', s)); });
+    sb.appendChild(inc);
+    var tot = h('div', 'total tnum'); var tl = h('div'); tl.appendChild(h('b', '', eur(o.price * pax)));
+    tot.appendChild(tl); tot.appendChild(h('span', '', eur(o.price) + ' asm. × ' + pax));
+    sb.appendChild(tot);
+    var acts = h('div', 'acts');
+    var req = h('button', 'btn main', 'Užklausti pasiūlymo'); req.type = 'button';
+    var note = h('p', 'beta-note'); note.hidden = true;
+    req.addEventListener('click', function () { note.textContent = 'Demo: čia atsidarytų ' + p.op + ' pasiūlymo puslapis.'; note.hidden = false; });
+    acts.appendChild(req);
+    var a = h('a', 'btn', 'Ieškoti tik skrydžio ↗'); a.href = flightLinks(d, dates, pax).google; a.target = '_blank'; a.rel = 'noopener noreferrer'; acts.appendChild(a);
+    sb.appendChild(acts); sb.appendChild(note);
+    sheet.appendChild(sb);
+    veil.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+    x.focus();
+  }
+  function closeSheet() {
+    veil.hidden = true;
+    document.documentElement.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  veil.addEventListener('click', function (e) { if (e.target === veil) closeSheet(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !veil.hidden) closeSheet(); });
+
+  /* Pokalbis */
+  function linkRow(list, cls) {
+    var row = h('div', cls);
+    list.forEach(function (txt) { var b = h('button', 'link', txt); b.type = 'button'; b.addEventListener('click', function () { handle(txt); }); row.appendChild(b); });
+    return row;
+  }
+  function monthLinks(today) {
+    var out = [];
+    for (var i = 1; i <= 4; i++) { var w = MONTH_ACC[(today.getMonth() + i) % 12]; out.push(w.charAt(0).toUpperCase() + w.slice(1)); }
+    return out;
+  }
+  function clearFollow() { var f = thread.querySelectorAll('.follow'); for (var i = 0; i < f.length; i++) f[i].remove(); }
+  function say(text, cls) { var p = h('p', 'b-msg' + (cls ? ' ' + cls : ''), text); thread.appendChild(p); return p; }
+  function ask(text, list) { say(text); thread.appendChild(linkRow(list, 'follow')); bottom(); }
+  function start() {
+    if (app.classList.contains('started')) return;
+    app.classList.add('started'); window.scrollTo(0, 0);
+    dock.appendChild(form);
+    input.placeholder = 'Parašyk toliau, pvz. „pigiau“';
+  }
+
+  async function handle(raw) {
+    var text = raw.trim();
+    if (!text || busy) return;
+    busy = true; start(); clearFollow();
+    thread.appendChild(h('div', 'u-msg', text));
+    var t = norm(text), today = dayStart(new Date());
+
+    if (/is naujo|nauja paieska|nuo pradziu/.test(t)) { ctx = newCtx(); ask('Gerai, pradedame iš naujo. Kada skrendi?', monthLinks(today)); busy = false; return; }
+    if (/kita data|kita diena|pakeisti data|kitu laiku/.test(t)) { ask('Kokią datą išbandome?', monthLinks(today)); busy = false; return; }
+
+    var before = signature(ctx);
+    var next = parseMessage(text, ctx, today);
+    var changed = signature(next) !== before;
+    next.offset = (!changed && ctx.shown) ? ctx.offset + 4 : 0;
+    ctx = next;
+    var dates = resolveDates(ctx, today);
+
+    if (!dates) { ask('Kada norėtum skristi? Gali parašyti mėnesį, konkrečią dieną ar „savaitgalį“.', monthLinks(today)); busy = false; return; }
+    if (!ctx.interests.length && !ctx.named.length && !ctx.budget && !ctx.board && !ctx.asked) {
+      ctx.asked = true;
+      ask('Ko ieškai šioje kelionėje?', ['Jūra ir šiluma', 'Miestas ir kultūra', 'Slidinėjimas', 'Kuo pigiau', 'Nesvarbu, pasiūlyk']);
+      busy = false; return;
+    }
+
+    var wait = h('p', 'b-msg'); wait.append('Renku pasiūlymus'); var dots = h('span', 'dots'); dots.innerHTML = '<i></i><i></i><i></i>'; wait.appendChild(dots);
+    thread.appendChild(wait); bottom();
+    await new Promise(function (r) { setTimeout(r, 700); });
+    wait.remove();
+
+    var pax = ctx.pax || 1;
+    var ranked = rankDests(ctx, dates);
+    var take = 4, off = ctx.named.length ? 0 : ctx.offset % ranked.length;
+    var slice = ranked.slice(off, off + take);
+    if (slice.length < take && !ctx.named.length) slice = slice.concat(ranked.slice(0, take - slice.length));
+    var offers = buildOffers(ctx, dates, slice);
+    if (offers.relaxed) offers = buildOffers(Object.assign({}, ctx, { maxBudget: null }), dates, slice);
+
+    var intro = 'Pasiūlymai iš Vilniaus ' + rangeText(dates) + ', ' + paxText(pax) + '.';
+    if (dates.approx) intro = 'Tikslios dienos nenurodei, todėl žiūrėjau nuo ' + dates.start.getDate() + ' ' + SHORT[dates.start.getMonth()] + '. ' + intro;
+    if (!changed && ctx.offset > 0) intro = 'Dar keli variantai. ' + intro;
+    say(intro);
+    if (offers.relaxed) say('Į nurodytą biudžetą nieko neradau, todėl rodau pigiausius variantus.', 'muted');
+    if (ctx.interests.indexOf('ski') !== -1 && slice.some(function (x) { return skiClosed(x.d, dates); })) say('Slidinėjimo sezonas trunka nuo lapkričio iki kovo, tą laiką kelialapių nėra.', 'muted');
+    thread.appendChild(buildResults(ctx, dates, pax, offers));
+    thread.appendChild(linkRow(['Šilčiau', 'Kuo pigiau', 'Viskas įskaičiuota', '5 žvaigždučių', 'Dar variantų', 'Kita data', 'Iš naujo'], 'follow'));
+    ctx.shown = true;
+    bottom();
+    busy = false;
+    input.focus({ preventScroll: true });
+  }
+
+  form.addEventListener('submit', function (e) { e.preventDefault(); var v = input.value; input.value = ''; handle(v); });
+
+  /* Pradinis vaizdas */
+  $('try').appendChild(linkRow(['Viskas įskaičiuota prie jūros lapkričio 20, dviese', 'Pigus miesto savaitgalis', 'Slidinėjimas vasarį'], 'links-inner'));
+  $('try').firstChild.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px 18px';
+  (function () {
+    var today = dayStart(new Date()), c = newCtx();
+    c.interests = ['beach', 'warm']; c.pax = 2; c.isoStart = iso(addDays(today, 21));
+    var dates = resolveDates(c, today), ranked = rankDests(c, dates).slice(0, 3);
+    var offers = buildOffers(c, dates, ranked);
+    var best = sortOffers(offers.pk, 'rec').filter(function (o, i, a) { return a.findIndex(function (z) { return z.d.id === o.d.id; }) === i; }).slice(0, 3);
+    var peek = $('peek');
+    peek.appendChild(secHead('Populiaru dabar', rangeText(dates) + ', ' + paxText(2)));
+    var g = h('div', 'grid'); best.forEach(function (o) { g.appendChild(pkgCard(o, dates, 2)); }); peek.appendChild(g);
+  })();
+  /* ---------- Vietinių rekomendacijos (demonstraciniai duomenys) ---------- */
+  var CAT = { stay: 'Apsistoti', eat: 'Pavalgyti', do: 'Veikti', tip: 'Patarimas' };
+  
+  var DESC = {
+    bcn: 'Miestas prie jūros: Gaudí architektūra, tapas ir paplūdimys tramvajaus atstumu.',
+    fco: 'Amžinasis miestas: senovės griuvėsiai, trattorijos ir aikštės, kuriose norisi sėdėti valandų valandas.',
+    lis: 'Kalvoti rajonai, geltoni tramvajai ir žuvis ant grotelių. Pigiausia Vakarų Europos sostinė.',
+    agp: 'Pietų Ispanijos saulė, espetos ant smėlio ir senamiestis pėsčiomis. Šilta beveik visus metus.',
+    her: 'Didžiausia Graikijos sala: minojų rūmai, tavernos ir smėlio paplūdimiai.',
+    ayt: 'Turkijos rivjera: viskas įskaičiuota viešbučiai, kalnai už nugaros ir šilta jūra iki lapkričio.',
+    tfs: 'Pavasaris visus metus: juodo smėlio paplūdimiai, Teide vulkanas ir žiemą +22 °C.',
+    hrg: 'Raudonoji jūra ir koralų rifai. Šilta net žiemą, o viešbučiai pigūs.',
+    dxb: 'Dangoraižiai, dykuma ir paplūdimiai. Geriausia vykti lapkritį–kovą.',
+    prg: 'Gotikos bokštai, alus ir trumpas skrydis. Puikus savaitgaliui.',
+    mla: 'Maža sala su šimtmečių istorija, skaidriu vandeniu ir nardymu.',
+    bud: 'Terminės pirtys, ruin barai ir Dunojus vakare. Pigu ir arti.',
+    ski: 'Slidinėjimas už kelių euro dalį Alpių kainų. Sezonas nuo gruodžio iki kovo.'
+  };
+  var LOCALS = {
+    bcn: [
+      { n: 'Marta', y: 9, code: 'MARTA-BCN', recs: [
+        ['stay', 'Apartamentai Gràcia kvartale', 'Gràcia', 'Ramu naktį, aplink kavinių aikštės, metro 5 min.', 'nuo 70 €/n.'],
+        ['eat', 'Bodega Joan', 'Sant Antoni', 'Tapas už normalią kainą, vietiniai valgo prie baro.', '10–15 €'] ] },
+      { n: 'Jonas', y: 4, code: 'JONAS-BCN', recs: [
+        ['do', 'Saulėlydis Bunkers del Carmel', 'Carmel', 'Nemokama, bet ateik valandą prieš saulėlydį.', '0 €'],
+        ['tip', 'Pietų ir vakarienės laikas', 'Visur', 'Virtuvės pilnos po 21 val. Pietums rink 14–15 val. su menu del día.', 'menu ~14 €'] ] } ],
+    fco: [
+      { n: 'Giulia', y: 12, code: 'GIULIA-FCO', recs: [
+        ['eat', 'Trattoria Da Enzo', 'Trastevere', 'Carbonara be turistinių kainų. Rezervuok iš anksto.', '12–18 €'],
+        ['stay', 'Butas Monti rajone', 'Monti', 'Pėsčiomis iki Koliziejaus, bet be minios.', 'nuo 80 €/n.'] ] },
+      { n: 'Tomas', y: 3, code: 'TOMAS-FCO', recs: [
+        ['do', 'Vatikano muziejai vakare', 'Vatikanas', 'Penktadieniais dirba iki vėlai, eilė trumpesnė.', '~30 €'],
+        ['tip', 'Gerk iš nasoni fontanėlių', 'Visur', 'Miesto fontanėliai su geriamu vandeniu. Pasiimk buteliuką.', '0 €'] ] } ],
+    lis: [
+      { n: 'Inês', y: 15, code: 'INES-LIS', recs: [
+        ['eat', 'Tasca do Chico', 'Alfama', 'Fado vakarais, žuvis ant grotelių.', '15–20 €'],
+        ['tip', 'Tramvajus 28 ryte', 'Alfama', 'Važiuok iki 9 val., vėliau eilės.', '3 €'] ] },
+      { n: 'Rui', y: 6, code: 'RUI-LIS', recs: [
+        ['stay', 'Butikinis hostelis Baixa', 'Baixa', 'Viskas pėsčiomis, geras susisiekimas.', 'nuo 55 €/n.'],
+        ['do', 'Dienos išvyka į Sintrą', 'Sintra', 'Traukinys iš Rossio, pirmas 8:00.', '~12 €'] ] } ],
+    agp: [
+      { n: 'Carlos', y: 11, code: 'CARLOS-AGP', recs: [
+        ['eat', 'Chiringuito El Mero', 'El Palo', 'Espetos ant smėlio, be turistų.', '12–16 €'],
+        ['do', 'Alcazaba ryte', 'Centras', 'Prieš karštį. Bilietas kartu su Gibralfaro pigesnis.', '~5 €'] ] },
+      { n: 'Elena', y: 5, code: 'ELENA-AGP', recs: [
+        ['stay', 'Viešbutis La Malagueta', 'La Malagueta', 'Paplūdimys per 3 min., ramu.', 'nuo 75 €/n.'],
+        ['tip', 'Automobilį nuomok vienai dienai', 'Costa del Sol', 'Miestas pėsčiomis, mašina reikalinga tik Rondai.', '~35 €/d.'] ] } ],
+    her: [
+      { n: 'Eleni', y: 20, code: 'ELENI-HER', recs: [
+        ['eat', 'Taverna Peskesi', 'Heraklionas', 'Kretos virtuvė iš ūkio produktų.', '15–20 €'],
+        ['do', 'Knoso rūmai prieš 10 val.', 'Knosas', 'Karštis ir autobusai atvažiuoja vėliau.', '~15 €'] ] },
+      { n: 'Nikos', y: 7, code: 'NIKOS-HER', recs: [
+        ['stay', 'Studijos Malijoje', 'Malia', 'Pigiau nei Elounda, paplūdimys 5 min.', 'nuo 40 €/n.'],
+        ['tip', 'Automobilis būtinas', 'Kreta', 'Autobusai retai, gražiausi paplūdimiai atokiai.', '~30 €/d.'] ] } ],
+    ayt: [
+      { n: 'Ayşe', y: 14, code: 'AYSE-AYT', recs: [
+        ['eat', 'Pide salonas Kaleiçi', 'Kaleiçi', 'Pide su sūriu, 3 kartus pigiau nei viešbutyje.', '4–6 €'],
+        ['do', 'Düden krioklys rytą', 'Düden', 'Vėsu, nėra grupių.', '~3 €'] ] },
+      { n: 'Murat', y: 8, code: 'MURAT-AYT', recs: [
+        ['stay', 'Viešbutis prie Konyaaltı', 'Konyaaltı', 'Ilgas paplūdimys, mažiau minios nei Lara.', 'nuo 55 €/n.'],
+        ['tip', 'Keisk eurus mieste', 'Visur', 'Viešbučiuose kursas prastas, imk grynųjų.', '—'] ] } ],
+    tfs: [
+      { n: 'Carmen', y: 10, code: 'CARMEN-TFS', recs: [
+        ['do', 'Teide su gondola', 'Teide', 'Bilietą pirk internetu, imk pirmą gondolą.', '~40 €'],
+        ['eat', 'Guachinche La Esperanza', 'La Orotava', 'Vietinių „guachinche“ su namų vynu.', '10–14 €'] ] },
+      { n: 'Pedro', y: 6, code: 'PEDRO-TFS', recs: [
+        ['stay', 'Apartamentai Los Cristianos', 'Los Cristianos', 'Saulėta žiemą, uostas ir paplūdimys.', 'nuo 65 €/n.'],
+        ['tip', 'Pasiimk megztinį į Teide', 'Teide', 'Viršuje 10 laipsnių šalčiau nei pakrantėje.', '—'] ] } ],
+    hrg: [
+      { n: 'Omar', y: 13, code: 'OMAR-HRG', recs: [
+        ['do', 'Nardymas prie Giftun salų', 'Hurgada', 'Rinkis vietinį centrą, ne viešbučio pasiūlymą.', '~35 €'],
+        ['eat', 'Žuvies restoranas El Mina', 'El Dahar', 'Žuvį pasirenki iš ledo, mokama pagal svorį.', '8–12 €'] ] },
+      { n: 'Salma', y: 5, code: 'SALMA-HRG', recs: [
+        ['stay', 'Viešbutis Sahl Hasheesh', 'Sahl Hasheesh', 'Ramu, švarus rifas prie kranto.', 'nuo 55 €/n.'],
+        ['tip', 'Derėkis turguje', 'Sakala', 'Pradėk nuo pusės kainos.', '—'] ] } ],
+    dxb: [
+      { n: 'Fatima', y: 8, code: 'FATIMA-DXB', recs: [
+        ['eat', 'Al Fahidi senasis Dubajus', 'Bur Dubai', 'Arabiška virtuvė, 3 kartus pigiau nei prekybos centruose.', '8–12 €'],
+        ['do', 'Burj Khalifa saulėlydžiu', 'Downtown', 'Bilietą pirk iš anksto, ryte pigiau.', '~40 €'] ] },
+      { n: 'Arvydas', y: 3, code: 'ARVYDAS-DXB', recs: [
+        ['stay', 'Viešbutis Marina', 'Marina', 'Metro ir tramvajus šalia.', 'nuo 95 €/n.'],
+        ['tip', 'Metro vietoj taksi', 'Visur', 'Nol kortelė, vienas važiavimas apie 1 €.', '~1 €'] ] } ],
+    prg: [
+      { n: 'Petra', y: 18, code: 'PETRA-PRG', recs: [
+        ['eat', 'Hospoda U Medvídků', 'Staré Město', 'Alus ir guliašas be turistų.', '8–12 €'],
+        ['do', 'Karolio tiltas 6 val.', 'Centras', 'Tuščias, gražiausia šviesa.', '0 €'] ] },
+      { n: 'Lukas', y: 4, code: 'LUKAS-PRG', recs: [
+        ['stay', 'Butas Vinohrady', 'Vinohrady', 'Ramiau nei centre, tramvajus iki Senamiesčio.', 'nuo 55 €/n.'],
+        ['tip', 'Mokėk kronomis', 'Visur', 'Gatvės keitykla apgauna, rinkis bankomatą.', '—'] ] } ],
+    mla: [
+      { n: 'Maria', y: 16, code: 'MARIA-MLA', recs: [
+        ['do', 'Blue Lagoon, Comino sala', 'Comino', 'Plauk rytą, laivelis iki 10 val.', '~25 €'],
+        ['eat', 'Žuvies restoranas Marsaxlokk', 'Marsaxlokk', 'Šviežia žuvis prie uosto, sekmadienį turgus.', '15–20 €'] ] },
+      { n: 'Joe', y: 9, code: 'JOE-MLA', recs: [
+        ['stay', 'Viešbutis Valetoje', 'Valeta', 'Miesto širdis, autobusai iš oro uosto.', 'nuo 80 €/n.'],
+        ['tip', 'Savaitės autobusų kortelė', 'Visa Malta', '7 dienų kortelė už 21 €.', '21 €'] ] } ],
+    bud: [
+      { n: 'Eszter', y: 10, code: 'ESZTER-BUD', recs: [
+        ['eat', 'Központi Kávéház', 'Pest', 'Klasikinė kavinė, pusryčiai.', '8–12 €'],
+        ['do', 'Széchenyi pirtis ryte', 'Városliget', 'Nuo 7 val., mažiau žmonių.', '~25 €'] ] },
+      { n: 'Bence', y: 5, code: 'BENCE-BUD', recs: [
+        ['stay', 'Butas VII rajone', 'Erzsébetváros', 'Gyva naktis, viskas pėsčiomis.', 'nuo 50 €/n.'],
+        ['tip', 'Ruin barai', 'VII rajonas', 'Pradėk nuo Szimpla sekmadienį.', '—'] ] } ],
+    ski: [
+      { n: 'Ivan', y: 12, code: 'IVAN-SKI', recs: [
+        ['eat', 'Mehana Dedo Pene', 'Bansko', 'Bulgariška virtuvė, porcijos didelės.', '8–12 €'],
+        ['do', 'Gondola 8 val.', 'Bansko', 'Pirmos 30 min. be eilių.', '~45 €/d.'] ] },
+      { n: 'Mila', y: 6, code: 'MILA-SKI', recs: [
+        ['stay', 'Chalet prie gondolos', 'Bansko', 'Į trasą eini pėsčiomis.', 'nuo 70 €/n.'],
+        ['tip', 'Slidžių nuoma kaime', 'Bansko', 'Pigiau nei kalno stotyje.', '~15 €/d.'] ] } ]
+  };
+
+  function allLocalsFor(id) { return LOCALS[id] || []; }
+
+  /* ---------- Krypties puslapis ---------- */
+  var dview = $('destView');
+  function openDest(id) {
+    var d = DESTS.filter(function (x) { return x.id === id; })[0]; if (!d) return;
+    dview.textContent = '';
+    var back = h('button', 'back', '← Visos kryptys'); back.type = 'button'; back.addEventListener('click', closeDest);
+    dview.appendChild(back);
+    var top = h('div', 'dtop');
+    var im = h('div', 'dimg'); im.appendChild(photo(d.id, d.name)); top.appendChild(im);
+    var info = h('div', 'dinfo');
+    info.appendChild(h('p', 'dwhere', d.country));
+    info.appendChild(h('h2', '', d.name));
+    info.appendChild(h('p', 'ddesc', DESC[d.id] || ''));
+    var facts = h('dl', 'facts');
+    var best = d.t.indexOf(Math.max.apply(null, d.t));
+    [['Skrydis iš Vilniaus', 'nuo ' + Math.round(d.fl.p * 0.85) + ' €'], ['Kelionės laikas', d.fl.dur + ', ' + d.fl.st],
+     ['Šilčiausia', SHORT[best]], ['Rekomendacijos', allLocalsFor(d.id).reduce(function (n, l) { return n + l.recs.length; }, 0) + ' vietos']].forEach(function (r) {
+      var w = h('div'); w.appendChild(h('dt', '', r[0])); w.appendChild(h('dd', 'tnum', r[1])); facts.appendChild(w);
+    });
+    info.appendChild(facts);
+    var cta = h('button', 'btn main', 'Rodyti kelialapius ir skrydžius'); cta.type = 'button';
+    cta.addEventListener('click', function () { closeDest(); handle(d.name); });
+    info.appendChild(cta);
+    top.appendChild(info); dview.appendChild(top);
+
+    var temps = h('div', 'temps');
+    d.t.forEach(function (t, i) { var c = h('div', 'tm'); c.appendChild(h('b', 'tnum', t + '°')); c.appendChild(h('span', '', SHORT[i].replace('.', ''))); temps.appendChild(c); });
+    dview.appendChild(temps);
+
+    var locals = allLocalsFor(d.id);
+    var sec = h('section', 'lsec');
+    var sh = h('div', 'sec-h'); sh.appendChild(h('h2', '', 'Rekomendacijos: ' + d.name)); sh.appendChild(h('span', '', 'Iš patikrintų vietinių, kurie čia gyvena')); sec.appendChild(sh);
+    var tabs = h('div', 'tabs'); tabs.setAttribute('role', 'tablist');
+    var cur = 'all', list = h('div', 'rgrid');
+    var TS = [['all', 'Visi']].concat(Object.keys(CAT).map(function (k) { return [k, CAT[k]]; }));
+    var tEls = {};
+    TS.forEach(function (t) {
+      var b = h('button', 'tab', t[1]); b.type = 'button'; b.setAttribute('role', 'tab');
+      b.addEventListener('click', function () { cur = t[0]; draw(); }); tabs.appendChild(b); tEls[t[0]] = b;
+    });
+    var barw = h('div', 'bar'); barw.appendChild(tabs); sec.appendChild(barw); sec.appendChild(list);
+    function draw() {
+      TS.forEach(function (t) { tEls[t[0]].setAttribute('aria-selected', String(cur === t[0])); });
+      list.textContent = '';
+      var n = 0;
+      locals.forEach(function (l) {
+        l.recs.forEach(function (r) {
+          if (cur !== 'all' && r[0] !== cur) return;
+          n++;
+          var c = h('article', 'rec');
+          c.appendChild(h('span', 'rcat', CAT[r[0]]));
+          c.appendChild(h('h3', '', r[1]));
+          if (r[2] || r[4]) c.appendChild(h('p', 'rsub tnum', [r[2], r[4]].filter(Boolean).join(' · ')));
+          c.appendChild(h('p', 'rwhy', r[3]));
+          var by = h('div', 'rby');
+          by.appendChild(h('span', 'ok', '✓ Patikrintas'));
+          by.appendChild(h('span', '', l.n + (l.y ? ', čia gyvena ' + l.y + ' m.' : '')));
+          c.appendChild(by);
+          list.appendChild(c);
+        });
+      });
+      if (!n) list.appendChild(h('p', 'empty', 'Šioje kategorijoje patarimų dar nėra. Būk pirmas vietinis.'));
+    }
+    draw();
+    dview.appendChild(sec);
+    app.classList.add('viewing'); dview.hidden = false; window.scrollTo(0, 0);
+    back.focus({ preventScroll: true });
+  }
+  function closeDest() { app.classList.remove('viewing'); dview.hidden = true; if (!app.classList.contains('started')) { var k = $('kryptys'); if (k) k.scrollIntoView(); } }
+
+  /* Kryptys ir rekomendacijos */
+  var GROUPS = [
+    ['all', 'Visos', function () { return true; }],
+    ['rest', 'Poilsis', function (d) { return d.tags.indexOf('relax') !== -1 || d.tags.indexOf('beach') !== -1; }],
+    ['active', 'Aktyvi veikla', function (d) { return d.tags.indexOf('nature') !== -1 || d.tags.indexOf('ski') !== -1 || ['her', 'tfs', 'hrg', 'mla'].indexOf(d.id) !== -1; }],
+    ['city', 'Miestai ir kultūra', function (d) { return d.tags.indexOf('city') !== -1 || d.tags.indexOf('culture') !== -1; }],
+    ['food', 'Maistas', function (d) { return d.tags.indexOf('food') !== -1; }],
+    ['ski', 'Slidinėjimas', function (d) { return d.tags.indexOf('ski') !== -1; }]
+  ];
+  function tabBar(box, items, onPick) {
+    var els = {};
+    items.forEach(function (it, i) {
+      var b = h('button', 'tab', it[1]); b.type = 'button'; b.setAttribute('role', 'tab');
+      b.addEventListener('click', function () { Object.keys(els).forEach(function (k) { els[k].setAttribute('aria-selected', String(k === it[0])); }); onPick(it[0]); });
+      b.setAttribute('aria-selected', String(i === 0)); box.appendChild(b); els[it[0]] = b;
+    });
+  }
+  (function () {
+    var box = $('dests');
+    function draw(key) {
+      var g = GROUPS.filter(function (x) { return x[0] === key; })[0];
+      box.textContent = '';
+      DESTS.filter(g[2]).forEach(function (d) {
+        var b = h('button', 'dest'); b.type = 'button';
+        b.appendChild(photo(d.id, d.name));
+        var s = h('span'); s.appendChild(h('b', '', d.name));
+        s.appendChild(h('small', '', d.tags.slice(0, 3).map(function (t) { return TAG_LABEL[t]; }).join(', ')));
+        s.appendChild(h('small', 'tnum', 'skrydis nuo ' + Math.round(d.fl.p * 0.85) + ' €'));
+        b.appendChild(s);
+        b.addEventListener('click', function () { openDest(d.id); });
+        box.appendChild(b);
+      });
+    }
+    tabBar($('dfilters'), GROUPS, draw);
+    draw('all');
+  })();
+  (function () {
+    var grid = $('recGrid'), items = [];
+    DESTS.forEach(function (d, di) {
+      var k = 0;
+      (LOCALS[d.id] || []).forEach(function (l) { l.recs.forEach(function (r) { items.push({ d: d, l: l, r: r, k: k++, di: di }); }); });
+    });
+    items.sort(function (a, b) { return a.k - b.k || a.di - b.di; });
+    function draw(cat) {
+      grid.textContent = '';
+      items.filter(function (x) { return cat === 'all' || x.r[0] === cat; }).slice(0, 9).forEach(function (x) {
+        var c = h('button', 'rec rbtn'); c.type = 'button';
+        c.appendChild(h('span', 'rcat', CAT[x.r[0]] + ' · ' + x.d.name));
+        c.appendChild(h('h3', '', x.r[1]));
+        c.appendChild(h('p', 'rsub tnum', [x.r[2], x.r[4]].filter(Boolean).join(' · ')));
+        c.appendChild(h('p', 'rwhy', x.r[3]));
+        var by = h('div', 'rby'); by.appendChild(h('span', 'ok', '✓ Patikrintas')); by.appendChild(h('span', '', x.l.n + ', čia gyvena ' + x.l.y + ' m.'));
+        c.appendChild(by);
+        c.addEventListener('click', function () { openDest(x.d.id); });
+        grid.appendChild(c);
+      });
+    }
+    tabBar($('rfilters'), [['all', 'Visos']].concat(Object.keys(CAT).map(function (k) { return [k, CAT[k]]; })), draw);
+    draw('all');
+  })();
+  Array.prototype.forEach.call(document.querySelectorAll('.nav nav a'), function (a) {
+    a.addEventListener('click', function (e) {
+      if (app.classList.contains('started') || app.classList.contains('viewing')) { e.preventDefault(); location.hash = a.getAttribute('href'); location.reload(); }
+    });
+  });
+  $('home').addEventListener('click', function () { location.reload(); });
+  $('ctaBtn').addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); input.focus({ preventScroll: true }); });
+  $('credits').textContent = 'Nuotraukos: Unsplash, autoriai ' + Object.keys(CREDIT).map(function (k) { return CREDIT[k]; }).filter(function (v, i, a) { return a.indexOf(v) === i && v !== 'Unsplash'; }).join(', ') + '.';
+})();
+</script>
+</body>
+</html>
