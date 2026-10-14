@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>noPlano – kur ilsėsimės, pasakys vietiniai</title>
 <meta name="description" content="Parašyk, kur ir kada nori keliauti. noPlano parodys kelialapius ir pigius skrydžius iš Vilniaus.">
-<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="icon" href="images/noplano-logo.jpg" type="image/jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -30,6 +30,7 @@ button,select,input{font-family:inherit}
 .nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
 .brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none;font-weight:800;font-size:1.2rem;letter-spacing:-.03em;background:none;border:0;padding:0;cursor:pointer}
 .brand svg{width:34px;height:34px;display:block}
+.brand-logo{height:28px;width:auto;display:block}
 .nav nav{margin-left:auto;display:flex;gap:22px;align-items:center}
 .nav nav a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem}
 .nav nav a:hover{color:var(--ink)}
@@ -257,7 +258,7 @@ button,select,input{font-family:inherit}
 
 <header class="nav">
   <div class="wrap">
-    <button class="brand" id="home" type="button" aria-label="noPlano, į pradžią"><svg><use href="#logo"/></svg>noPlano</button>
+    <button class="brand" id="home" type="button" aria-label="noPlano, į pradžią"><img class="brand-logo" src="images/noplano-logo.jpg" alt="noPlano"></button>
     <span class="beta">beta 0.1</span>
     <nav>
       <a href="#kryptys">Kryptys</a>
@@ -354,7 +355,7 @@ button,select,input{font-family:inherit}
 
   <footer class="foot">
     <div class="wrap">
-      <span class="brand"><svg><use href="#logo"/></svg>noPlano</span>
+      <span class="brand"><img class="brand-logo" src="images/noplano-logo.jpg" alt="noPlano"></span>
       <div>
         <p>Demonstracinė versija. Kelialapių pasiūlymai, viešbučiai ir kainos pavyzdiniai. Skrydžių paieškos nuorodos veikia tikrai.</p>
         <p id="credits"></p>
