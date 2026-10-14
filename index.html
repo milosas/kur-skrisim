@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kur skrisim – kur ilsėsimės, pasakys vietiniai</title>
-<meta name="description" content="Parašyk, kur ir kada nori keliauti. Kur skrisim parodys kelialapius ir pigius skrydžius iš Vilniaus.">
+<title>noplan – kur ilsėsimės, pasakys vietiniai</title>
+<meta name="description" content="Parašyk, kur ir kada nori keliauti. noplan parodys kelialapius ir pigius skrydžius iš Vilniaus.">
 <link rel="icon" href="logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,6 +146,10 @@ button,select,input{font-family:inherit}
 .frow a:hover{text-decoration:underline}
 .note{color:var(--muted);font-size:.86rem;max-width:70ch;margin-top:12px}
 .follow{display:flex;flex-wrap:wrap;gap:6px 20px}
+.daterow{align-items:center;gap:8px 10px;width:100%}
+.daterow input[type=date]{border:1px solid var(--line);border-radius:99px;padding:6px 12px;font:inherit;color:var(--ink);background:#fff}
+.daterow .link{background:var(--ink);color:#fff;padding:7px 14px;border-radius:99px;text-decoration:none}
+.daterow .link:hover{background:var(--ink);opacity:.85}
 .empty{color:var(--muted);padding-block:20px}
 
 /* Detalės */
@@ -253,8 +257,8 @@ button,select,input{font-family:inherit}
 
 <header class="nav">
   <div class="wrap">
-    <button class="brand" id="home" type="button" aria-label="Kur skrisim, į pradžią"><svg><use href="#logo"/></svg>Kur skrisim</button>
-    <span class="beta">demo</span>
+    <button class="brand" id="home" type="button" aria-label="noplan, į pradžią"><svg><use href="#logo"/></svg>noplan</button>
+    <span class="beta">beta 0.1</span>
     <nav>
       <a href="#kryptys">Kryptys</a>
       <a href="#rekomendacijos">Rekomendacijos</a>
@@ -303,8 +307,6 @@ button,select,input{font-family:inherit}
     </div>
   </section>
 
-  <section class="sec landing" id="populiaru"><div class="wrap" id="peek"></div></section>
-
   <section class="sec soft landing" id="kaip">
     <div class="wrap">
       <div class="sec-h"><h2>Kaip tai veikia</h2></div>
@@ -318,7 +320,7 @@ button,select,input{font-family:inherit}
 
   <section class="sec soft landing" id="kodel">
     <div class="wrap">
-      <div class="sec-h"><h2>Kodėl Kur skrisim</h2></div>
+      <div class="sec-h"><h2>Kodėl noplan</h2></div>
       <div class="why">
         <div>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>
@@ -352,7 +354,7 @@ button,select,input{font-family:inherit}
 
   <footer class="foot">
     <div class="wrap">
-      <span class="brand"><svg><use href="#logo"/></svg>Kur skrisim</span>
+      <span class="brand"><svg><use href="#logo"/></svg>noplan</span>
       <div>
         <p>Demonstracinė versija. Kelialapių pasiūlymai, viešbučiai ir kainos pavyzdiniai. Skrydžių paieškos nuorodos veikia tikrai.</p>
         <p id="credits"></p>
@@ -807,7 +809,19 @@ button,select,input{font-family:inherit}
   }
   function clearFollow() { var f = thread.querySelectorAll('.follow'); for (var i = 0; i < f.length; i++) f[i].remove(); }
   function say(text, cls) { var p = h('p', 'b-msg' + (cls ? ' ' + cls : ''), text); thread.appendChild(p); return p; }
-  function ask(text, list) { say(text); thread.appendChild(linkRow(list, 'follow')); bottom(); }
+  function dateRow(today) {
+    var row = h('form', 'follow daterow');
+    var inp = document.createElement('input');
+    inp.type = 'date'; inp.required = true;
+    inp.min = iso(today);
+    inp.setAttribute('aria-label', 'Pasirink tikslią datą');
+    var btn = h('button', 'link', 'Pasirinkti datą');
+    btn.type = 'submit';
+    row.appendChild(inp); row.appendChild(btn);
+    row.addEventListener('submit', function (e) { e.preventDefault(); if (inp.value) handle(inp.value); });
+    return row;
+  }
+  function ask(text, list, withDate) { say(text); thread.appendChild(linkRow(list, 'follow')); if (withDate) thread.appendChild(dateRow(dayStart(new Date()))); bottom(); }
   function start() {
     if (app.classList.contains('started')) return;
     app.classList.add('started'); window.scrollTo(0, 0);
@@ -822,8 +836,8 @@ button,select,input{font-family:inherit}
     thread.appendChild(h('div', 'u-msg', text));
     var t = norm(text), today = dayStart(new Date());
 
-    if (/is naujo|nauja paieska|nuo pradziu/.test(t)) { ctx = newCtx(); ask('Gerai, pradedame iš naujo. Kada skrendi?', monthLinks(today)); busy = false; return; }
-    if (/kita data|kita diena|pakeisti data|kitu laiku/.test(t)) { ask('Kokią datą išbandome?', monthLinks(today)); busy = false; return; }
+    if (/is naujo|nauja paieska|nuo pradziu/.test(t)) { ctx = newCtx(); ask('Gerai, pradedame iš naujo. Kada skrendi?', monthLinks(today), true); busy = false; return; }
+    if (/kita data|kita diena|pakeisti data|kitu laiku/.test(t)) { ask('Kokią datą išbandome?', monthLinks(today), true); busy = false; return; }
 
     var before = signature(ctx);
     var next = parseMessage(text, ctx, today);
@@ -832,7 +846,7 @@ button,select,input{font-family:inherit}
     ctx = next;
     var dates = resolveDates(ctx, today);
 
-    if (!dates) { ask('Kada norėtum skristi? Gali parašyti mėnesį, konkrečią dieną ar „savaitgalį“.', monthLinks(today)); busy = false; return; }
+    if (!dates) { ask('Kada norėtum skristi? Gali parašyti mėnesį, konkrečią dieną ar „savaitgalį“, arba pasirinkti datą.', monthLinks(today), true); busy = false; return; }
     if (!ctx.interests.length && !ctx.named.length && !ctx.budget && !ctx.board && !ctx.asked) {
       ctx.asked = true;
       ask('Ko ieškai šioje kelionėje?', ['Jūra ir šiluma', 'Miestas ir kultūra', 'Slidinėjimas', 'Kuo pigiau', 'Nesvarbu, pasiūlyk']);
@@ -871,16 +885,6 @@ button,select,input{font-family:inherit}
   /* Pradinis vaizdas */
   $('try').appendChild(linkRow(['Viskas įskaičiuota prie jūros lapkričio 20, dviese', 'Pigus miesto savaitgalis', 'Slidinėjimas vasarį'], 'links-inner'));
   $('try').firstChild.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px 18px';
-  (function () {
-    var today = dayStart(new Date()), c = newCtx();
-    c.interests = ['beach', 'warm']; c.pax = 2; c.isoStart = iso(addDays(today, 21));
-    var dates = resolveDates(c, today), ranked = rankDests(c, dates).slice(0, 3);
-    var offers = buildOffers(c, dates, ranked);
-    var best = sortOffers(offers.pk, 'rec').filter(function (o, i, a) { return a.findIndex(function (z) { return z.d.id === o.d.id; }) === i; }).slice(0, 3);
-    var peek = $('peek');
-    peek.appendChild(secHead('Populiaru dabar', rangeText(dates) + ', ' + paxText(2)));
-    var g = h('div', 'grid'); best.forEach(function (o) { g.appendChild(pkgCard(o, dates, 2)); }); peek.appendChild(g);
-  })();
   /* ---------- Vietinių rekomendacijos (demonstraciniai duomenys) ---------- */
   var CAT = { stay: 'Apsistoti', eat: 'Pavalgyti', do: 'Veikti', tip: 'Patarimas' };
   
